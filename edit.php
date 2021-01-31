@@ -236,11 +236,12 @@ if ( $schools >0 ){
 	$edu_counter=0;
 	foreach($schools as $school){
 				$edu_counter++;
-				echo  '<p>Year: <input type="text" name="edu_year' . $edu_counter . '" value="' . $school['year'] . '">
-                <input type="button" value="-" onclick="$(\'#edu' . $edu_counter . '\').remove();return false;\"></p>
-                <p>School: <input type="text" size="80" name="edu_school' . $edu_counter . '" class="school" 
-                value="' . htmlentities($school['name']) . '" />';
-				
+				echo   "<div id='edu".$edu_counter."'> 
+                <p>Year: <input type='text' name='edu_year".$edu_counter."' value=".htmlspecialchars($school['year'])." /> 
+                <input type='button' value='-' 
+                    onclick='removeeduFunction(".$edu_counter.");return false;'></p> 
+                    <input type='text' name='edu_school".$counter."' rows='8' cols='80' value='".htmlspecialchars($school['name'])."'/>
+                </div>";
 			} 
 		}
 $_SESSION['edu_counter']=$edu_counter;
@@ -273,7 +274,9 @@ $_SESSION['edu_counter']=$edu_counter;
 function removeFunction(x) {
   $('#position'+x).remove();
 }
-
+function removeeduFunction(x) {
+  $('#edu'+x).remove();
+}
 
 countPos=<?php echo $_SESSION['counter']; ?>; 
 $(document).ready(function(){
